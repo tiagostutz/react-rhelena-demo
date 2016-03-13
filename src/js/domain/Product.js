@@ -2,19 +2,14 @@ import productsDataBase from './data/products.js'
 
 import ProductEvents from '../events/ProductEvents'
 
-export default {
+export default class Product{
 
-    fetchAll(timeout, cb) {
-        const TIMEOUT = 100;
+    static fetchAll(timeout, productsFetchedCallback) {
+        if (productsFetchedCallback && productsFetchedCallback !== null) {
+            productsFetchedCallback(productsDataBase);
+        }
 
-        timeout = timeout || TIMEOUT;
-        setTimeout(() => {
-            if (cb && cb !== null) {
-                cb(productsDataBase);
-            }else{
-                ProductEvents.publishOnProductsFetched(productsDataBase)
-            }
-        }, timeout);
+        ProductEvents.publishOnProductsFetched(productsDataBase);
     }
-    
+
 }
