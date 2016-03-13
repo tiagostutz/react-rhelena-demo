@@ -1,6 +1,7 @@
 import { RhelenaPresentationModel } from 'rhelena'
 
-import Cart from '../domain/Cart.js'
+import __sessionData from '../stores/SessionDataStore.js'
+
 import Product from '../domain/Product.js'
 
 import CartModel from '../models/CartModel'
@@ -19,7 +20,7 @@ export default class AppModel extends RhelenaPresentationModel{
         //initialize data
         this.availableProducts = [];
         this.unavailableProducts = [];
-        this.cart = { products: [], total: 0 };
+        this.cart = __sessionData.currentCart;
 
         //subscribe to event topics that will notify any change to the model regardless if the fetch method was invoked from this or another class
         //e.g.: if one user adds to cart a product and we want to update the product list from another person online, we just publish the updated product list to

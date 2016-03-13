@@ -1,7 +1,6 @@
 import { RhelenaPresentationModel } from 'rhelena'
 
-import Cart from '../domain/Cart.js'
-
+import __sessionData from '../stores/SessionDataStore.js'
 
 export default class ProductItemModel extends RhelenaPresentationModel{
 
@@ -11,7 +10,7 @@ export default class ProductItemModel extends RhelenaPresentationModel{
      }
 
      addToCart() {
-         Cart.add(this.product);
+         __sessionData.currentCart.addProduct(this.product);
      }
 
 }

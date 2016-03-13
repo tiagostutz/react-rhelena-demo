@@ -1,7 +1,5 @@
 import { RhelenaPresentationModel } from 'rhelena'
 
-import Cart from '../domain/Cart.js'
-
 import CartEvents from '../events/CartEvents'
 
 export default class CartModel extends RhelenaPresentationModel{
@@ -12,6 +10,6 @@ export default class CartModel extends RhelenaPresentationModel{
     }
 
     onCheckoutClicked() {
-        Cart.checkout();
+        this.cart.checkout();
     }
 }
