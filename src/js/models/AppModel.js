@@ -25,12 +25,14 @@ export default class AppModel extends RhelenaPresentationModel{
         ProductEvents.subscribeToProductSoldOut( soldOutProduct => {
             let updatedList = _self.availableProducts;
             let soldOutList = _self.unavailableProducts;
-            soldOutList.push(soldOutProduct);
             for (var i = 0; i < updatedList.length; i++) {
                 if(updatedList[i].id == soldOutProduct.id) {
                     updatedList.splice(i,1);
                 }
             }
+
+            soldOutList.push(soldOutProduct);
+
             _self.availableProducts = updatedList
             _self.unavailableProducts = soldOutList;
         } );
