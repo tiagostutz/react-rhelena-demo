@@ -22,10 +22,6 @@ export default class AppModel extends RhelenaPresentationModel{
         this.unavailableProducts = [];
         this.cart = __sessionData.currentCart;
 
-        //subscribe to event topics that will notify any change to the model regardless if the fetch method was invoked from this or another class
-        //e.g.: if one user adds to cart a product and we want to update the product list from another person online, we just publish the updated product list to
-        //the user. Or we could even publish just the product update and it would be updated in everyone that is seeing it
-        ProductEvents.subscribeToProductsFetched( fetchedProducts => { _self.availableProducts = fetchedProducts } );
         ProductEvents.subscribeToProductSoldOut( soldOutProduct => {
             let updatedList = _self.availableProducts;
             let soldOutList = _self.unavailableProducts;
@@ -41,7 +37,11 @@ export default class AppModel extends RhelenaPresentationModel{
         CartEvents.subscribeToCartUpdated( cartData => { _self.cart = cartData; } );
 
         //call the API that will publish the result on the subscribed topics above.
-        Product.fetchAll();
+        //If we wanted a more sofisticated approach, we would subscribe to event topics that will notify any change to the model regardless if the fetch method
+        //was invoked from this or another class
+        //e.g.: if one user adds to cart a product and we want to update the product list from another person online, we just publish the updated product list to
+        //the user. Or we could even publish just the product update and it would be updated in everyone that is seeing it
+        Product.fetchAll( fetchedProducts => { _self.availableProducts = fetchedProducts } );
      }
 
 }

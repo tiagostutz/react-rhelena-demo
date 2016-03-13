@@ -4,7 +4,7 @@ import ProductEvents from '../events/ProductEvents'
 
 export default class Product{
 
-    static fetchAll(timeout, productsFetchedCallback) {
+    static fetchAll(productsFetchedCallback) {
         if (productsFetchedCallback && productsFetchedCallback !== null) {
             productsFetchedCallback(productsDataBase);
         }
